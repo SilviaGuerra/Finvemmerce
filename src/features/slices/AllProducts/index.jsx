@@ -23,10 +23,7 @@ export default showProductsSlice.reducer;
 
 export const fetchAllproducts = () => (dispatch) => {
   axios
-    .get(
-      `https://fakestoreapi.com/products?limit=4`
-      // `https://seashell-app-fpkyl.ondigitalocean.app/api/items?q=${results}&limit=4`
-    )
+    .get(`https://fakestoreapi.com/products?limit=4`)
     .then((response) => {
       dispatch(resultsProducts(response.data));
     })
@@ -34,10 +31,11 @@ export const fetchAllproducts = () => (dispatch) => {
 };
 
 export const fetchItemDetails = (id) => (dispatch) => {
+  console.log("ID?", id);
   axios
     .get(`https://fakestoreapi.com/products/${id}`)
-    // .get(`https://seashell-app-fpkyl.ondigitalocean.app/api/items/${id}`)
     .then((response) => {
+      console.log("RESPONSE DETAIL", response);
       dispatch(details(response.data));
     })
     .catch((error) => console.log(error, "error"));
