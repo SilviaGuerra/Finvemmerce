@@ -6,6 +6,7 @@ export const showProductsSlice = createSlice({
   initialState: {
     results: [],
     details: {},
+    chosenProduct: [],
   },
   reducers: {
     resultsProducts: (state, action) => {

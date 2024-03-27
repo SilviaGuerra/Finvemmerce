@@ -1,29 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const loginUserSlice = createSlice({
   name: "login",
   initialState: {
-    email: "",
-    pass: "",
-    login: false,
+    token: "",
+    userId: null,
   },
   reducers: {
-    dataEmail: (state, action) => {
-      state.email = action.payload;
-    },
-    dataPass: (state, action) => {
-      state.pass = action.payload;
-    },
     dataLogin: (state, action) => {
-      state.login = action.payload;
+      state.token = action.payload;
+      state.userId = 1;
     },
     reset: (state) => {
-      state.pass = "";
-      state.email = "";
-      state.login = false;
+      state.token = "";
     },
   },
 });
 
-export const { dataEmail, dataPass, dataLogin, reset } = loginUserSlice.actions;
+export const { dataLogin, reset } = loginUserSlice.actions;
 export default loginUserSlice.reducer;
+
+export const fetchLoginUser = (state) => (dispatch) => {
+  axios
+    .post(`https://fakestoreapi.com/auth/login`, {
+      username: state.username,
+      password: state.password,
+    })
+    .then((response) => {
+      console.log("REsponse", response);
+      dispatch(dataLogin(response.data.token));
+    })
+    .catch((error) => console.log(error, "error"));
+};

@@ -22,6 +22,7 @@
 import { Fragment, useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchItemDetails } from "../../features/slices/AllProducts";
+import { addProduct } from "../../features/slices/Cart";
 import { useParams } from "react-router";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
@@ -32,16 +33,26 @@ import { Link } from "react-router-dom";
 
 export default function Example() {
   const details = useSelector((state) => state.showProducts.details);
-  const loginStatus = useSelector((state) => state.login.login);
+  const loginStatus = useSelector((state) => state.login.token);
   const dispatch = useDispatch();
   const params = useParams();
   // const [open, setOpen] = useState(true);
 
   // const cancelButtonRef = useRef(null);
 
+  console.log("Login status", loginStatus);
   useEffect(() => {
     dispatch(fetchItemDetails(params.id));
   }, [dispatch, params.id]);
+
+  const handleChosenProduct = () => {
+    console.log("Mochila");
+    dispatch(addProduct(details));
+    // const likedProduct = [];
+    // likedProduct.push(details);
+    // console.log(likedProduct, "LIKEEEEE");
+    // return likedProduct;
+  };
 
   return (
     <div className="bg-white">
@@ -143,6 +154,7 @@ export default function Example() {
                 <button
                   type="submit"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  onClick={handleChosenProduct}
                 >
                   {loginStatus ? (
                     <Link to="/Checkout">Agrega al carrito</Link>

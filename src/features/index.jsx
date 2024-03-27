@@ -1,10 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import showProductsSlice from "./slices/AllProducts";
-import loginUserSlice from "./slices/Login";
+import { persistReducer } from "redux-persist";
+// import storage from 'redux-persist/lib/storage';
+import rootReducer from "./rootReducer";
+import persistConfig from "./persistConfig";
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    showProducts: showProductsSlice,
-    login: loginUserSlice,
-  },
+  reducer: persistedReducer,
+  // reducer: {
+  //   showProducts: showProductsSlice,
+  //   login: loginUserSlice,
+  //   cart: cartSlice,
+  // },
 });
