@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import LogoFinvero from "../../assets/logo_white.png";
 import { Link } from "react-router-dom";
-import { reset } from "../../features/slices/Login";
+import { reset } from "../../store/slices/Login";
 import Checkout from "../Checkout/Checkout";
 
 const navigation = [
@@ -30,6 +30,10 @@ export default function Navbar() {
 
   const handleLogout = () => {
     dispatch(reset());
+  };
+
+  const onClose = () => {
+    setOpenCheckout(false);
   };
 
   return (
@@ -66,7 +70,7 @@ export default function Navbar() {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <button onClick={() => setOpenCheckout(!openCheckout)}>
+          <button onClick={() => setOpenCheckout(true)}>
             <ShoppingCartIcon className="h-7 w-7 m-3 text-white" />
           </button>
           {loginStatus ? (
@@ -172,7 +176,7 @@ export default function Navbar() {
           </div>
         </Dialog.Panel>
       </Dialog>
-      {openCheckout && <Checkout />}
+      {openCheckout && <Checkout isOpen={openCheckout} onClose={onClose} />}
     </header>
   );
 }

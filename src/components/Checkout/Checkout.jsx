@@ -1,11 +1,10 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 
-const Checkout = () => {
-  const [open, setOpen] = useState(true);
+const Checkout = ({ isOpen, onClose }) => {
   const cart = useSelector((state) => state.cart.cart);
   const navigate = useNavigate();
 
@@ -18,8 +17,8 @@ const Checkout = () => {
   };
 
   return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
+    <Transition.Root show={isOpen} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -55,7 +54,7 @@ const Checkout = () => {
                           <button
                             type="button"
                             className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => setOpen(false)}
+                            onClick={onClose}
                           >
                             <span className="absolute -inset-0.5" />
                             <span className="sr-only">Close panel</span>
@@ -124,7 +123,7 @@ const Checkout = () => {
                         <a
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                           onClick={() => {
-                            setOpen(false);
+                            onClose;
                             navigate("/");
                           }}
                         >
@@ -138,7 +137,7 @@ const Checkout = () => {
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
                             onClick={() => {
-                              setOpen(false);
+                              onClose;
                               navigate("/");
                             }}
                           >
