@@ -9,14 +9,22 @@ import {
 import LogoFinvero from "../../assets/logo_white.png";
 import { Link } from "react-router-dom";
 import { reset } from "../../store/slices/Login";
+import { fetchCategories } from "../../store/slices/Categories";
 import Checkout from "../Checkout/Checkout";
 
 const navigation = [
-  { name: "Ropa mujeres", href: "#" },
-  { name: "Ropa hombres", href: "#" },
-  { name: "Electrónicos", href: "#" },
-  { name: "Joyería", href: "#" },
+  { name: "Ropa mujeres" },
+  { name: "Ropa hombres" },
+  { name: "Electrónicos" },
+  { name: "Joyería" },
 ];
+
+const translations = {
+  "Ropa mujeres": "women's clothing",
+  "Ropa hombres": "men's clothing",
+  Electrónicos: "electronics",
+  Joyería: "jewelery",
+};
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -36,6 +44,11 @@ export default function Navbar() {
     setOpenCheckout(false);
   };
 
+  const handleCategory = (name) => {
+    const translatedName = translations[name] || name;
+    dispatch(fetchCategories(translatedName));
+  };
+
   return (
     <header className="absolute inset-x-0 top-0 z-10 bg-blue-600">
       <nav
@@ -43,8 +56,7 @@ export default function Navbar() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
+          <a href="/" className="-m-1.5 p-1.5">
             <img className="h-8 w-auto" src={LogoFinvero} alt="" />
           </a>
         </div>
@@ -62,8 +74,8 @@ export default function Navbar() {
           {navigation.map((item) => (
             <a
               key={item.name}
-              href={item.href}
               className="text-sm font-semibold leading-6 text-gray-900 text-white"
+              onClick={() => handleCategory(item.name)}
             >
               {item.name}
             </a>
@@ -105,7 +117,7 @@ export default function Navbar() {
                         )}
                         onClick={handleLogout}
                       >
-                        Sign out
+                        Cerrar sesión
                       </a>
                     )}
                   </Menu.Item>

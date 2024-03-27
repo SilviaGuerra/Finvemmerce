@@ -8,7 +8,6 @@ const cartSlice = createSlice({
   },
   reducers: {
     addProduct: (state, action) => {
-      console.log("ADD PRODUCT redux");
       state.product = action.payload;
       let cartUpdated = false;
       state.cart = state.cart.map((item) => {

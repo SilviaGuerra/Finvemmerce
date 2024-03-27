@@ -28,7 +28,7 @@ export default showProductsSlice.reducer;
 
 export const fetchAllproducts = () => (dispatch) => {
   axios
-    .get(`https://fakestoreapi.com/products?limit=4`)
+    .get(`https://fakestoreapi.com/products`)
     .then((response) => {
       dispatch(resultsProducts(response.data));
     })

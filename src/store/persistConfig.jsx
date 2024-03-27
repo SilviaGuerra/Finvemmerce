@@ -3,7 +3,7 @@ import storage from "redux-persist/lib/storage"; // Importa el almacenamiento qu
 const persistConfig = {
   key: "root",
   storage, // Puedes usar storage local o sessionStorage
-  whitelist: ["showProducts", "login", "cart"],
+  whitelist: ["showProducts", "login", "cart", "categories"],
 };
 
 export default persistConfig;
