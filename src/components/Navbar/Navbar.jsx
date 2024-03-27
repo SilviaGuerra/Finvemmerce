@@ -9,6 +9,7 @@ import {
 import LogoFinvero from "../../assets/logo_white.png";
 import { Link } from "react-router-dom";
 import { reset } from "../../features/slices/Login";
+import Checkout from "../Checkout/Checkout";
 
 const navigation = [
   { name: "Ropa mujeres", href: "#" },
@@ -23,6 +24,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openCheckout, setOpenCheckout] = useState(false);
   const loginStatus = useSelector((state) => state.login.token);
   const dispatch = useDispatch();
 
@@ -31,7 +33,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50 bg-blue-600">
+    <header className="absolute inset-x-0 top-0 z-10 bg-blue-600">
       <nav
         className="flex items-center justify-between p-6 lg:px-8"
         aria-label="Global"
@@ -64,7 +66,9 @@ export default function Navbar() {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <ShoppingCartIcon className="h-7 w-7 m-3 text-white" />
+          <button onClick={() => setOpenCheckout(!openCheckout)}>
+            <ShoppingCartIcon className="h-7 w-7 m-3 text-white" />
+          </button>
           {loginStatus ? (
             <Menu as="div" className="relative ml-3">
               <div>
@@ -134,7 +138,10 @@ export default function Navbar() {
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setOpenCheckout(false);
+              }}
             >
               <span className="sr-only">Close menu</span>
               <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -165,6 +172,7 @@ export default function Navbar() {
           </div>
         </Dialog.Panel>
       </Dialog>
+      {openCheckout && <Checkout />}
     </header>
   );
 }
