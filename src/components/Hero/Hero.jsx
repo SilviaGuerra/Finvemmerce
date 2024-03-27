@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchAllproducts } from "../../features/slices/AllProducts";
+import { fetchAllproducts } from "../../store/slices/AllProducts";
 
 export default function Hero() {
   const dispatch = useDispatch();
