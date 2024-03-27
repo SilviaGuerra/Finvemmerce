@@ -92,7 +92,7 @@ const Detail = () => {
         <Modal
           isOpen={addProductCart}
           title="Producto Agregado"
-          content="El producto ha sido agregado a tu carrito de compras con éxitoo"
+          content="El producto ha sido agregado a tu carrito de compras con éxito"
           onClose={onClose}
           textButton="Entendido"
         />
