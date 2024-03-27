@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import Pagination from "../Pagination";
 import { Link } from "react-router-dom";
 
 const ProductsList = () => {
@@ -38,7 +37,6 @@ const ProductsList = () => {
           ))}
         </div>
         <br />
-        {/* <Pagination /> */}
       </div>
     </div>
   );
